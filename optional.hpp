@@ -17,7 +17,7 @@
 # include <functional>
 # include <string>
 # include <stdexcept>
-# include <experimental/fundamental/v2/none.hpp>
+# include <experimental/nullable.hpp>
 
 # define TR2_OPTIONAL_REQUIRES(...) typename enable_if<__VA_ARGS__::value, bool>::type = false
 
@@ -761,6 +761,15 @@ template <class T> constexpr bool operator>=(const optional<T>& x, const optiona
 
 
 // 20.5.9, Comparison with nullopt
+constexpr bool operator==(nullopt_t, nullopt_t) noexcept
+{
+  return true;
+}
+constexpr bool operator!=(nullopt_t, nullopt_t) noexcept
+{
+  return false;
+}
+
 template <class T> constexpr bool operator==(const optional<T>& x, nullopt_t) noexcept
 {
   return (!x);
